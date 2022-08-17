@@ -1,0 +1,65 @@
+.nav-menu {
+	list-style-type: none;
+
+	button {
+		cursor: pointer;
+		display: none;
+		background: none;
+		outline: none;
+		border: none;
+	}
+	.nav-menu__item {
+		overflow: auto;
+		display: flex;
+
+		padding: 10px 13px 11px 12px;
+		a {
+			margin-left: 10px;
+			color: #000;
+			text-decoration: none;
+		}
+		&:first-of-type {
+			margin-bottom: 28px;
+		}
+		button {
+			margin-left: 38px;
+		}
+		img {
+			width: 15px;
+			height: 15px;
+		}
+	}
+	.active {
+		background: #fff;
+		button {
+			display: inline-block;
+		}
+	}
+}
+
+.addFolder {
+	margin-top: 37px;
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17px;
+	letter-spacing: 0.15px;
+	cursor: pointer;
+	background: none;
+	border: none;
+	outline: none;
+	transition: opacity 1s ease-in-out;
+	&:hover {
+		opacity: 0.8;
+	}
+	span {
+		margin-right: 10px;
+	}
+	color: #767676;
+}
+
+nav {
+	background: #b4b4b4;
+	padding: 57px 40px 179px 28px;
+}
