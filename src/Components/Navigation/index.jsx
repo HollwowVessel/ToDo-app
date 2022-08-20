@@ -3,25 +3,32 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 
 import './style.scss';
-import { folderMock } from '../../Mocks/Folder';
+
 import { Item } from './Item';
 import { Popup } from './Popup';
+import { setActiveFolder } from '../../redux/slices/folderSlice';
 import { changePopup } from '../../redux/slices/addSlice';
-import { changeActiveFolder } from '../../redux/slices/activeSlice';
 
 export const Navigation = () => {
 	const dispatch = useDispatch();
 	const open = useSelector((state) => state.changePopup.popupOpen);
-	const active = useSelector((state) => state.setActive.activeFolder);
+	const currentFolder = useSelector((state) => state.changeFolder.folders);
+	const [active, setActive] = useState(0);
+
+	function handleActiveFolder(id) {
+		dispatch(setActiveFolder(id));
+		setActive(id);
+	}
+
 	return (
 		<nav>
 			<ul className="nav-menu">
-				{folderMock.map((obj, ind) => (
+				{currentFolder.map((obj, ind) => (
 					<Item
 						key={ind}
 						{...obj}
 						state={ind === active ? 'active' : ''}
-						handleClick={() => dispatch(changeActiveFolder(ind))}
+						handleClick={() => handleActiveFolder(ind)}
 					/>
 				))}
 			</ul>

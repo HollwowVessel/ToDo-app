@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import activeSlice from './slices/activeSlice';
+
 import addSlice from './slices/addSlice';
+import folderSlice from './slices/folderSlice';
 
 export const store = configureStore({
-	reducer: { changePopup: addSlice, setActive: activeSlice },
+	reducer: { changePopup: addSlice, changeFolder: folderSlice },
 });

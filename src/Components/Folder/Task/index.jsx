@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 
 export const Task = ({ desc, status }) => {
-	const [text, setText] = useState('');
-	React.useEffect(() => {
-		setText(desc);
-	}, []);
+	const [text, setText] = useState(desc);
+
 	return (
 		<div className="task">
 			<div className="task-container">

@@ -1,27 +1,10 @@
 export const folderMock = [
 	{
-		id: 0,
+		id: 1,
 		color: 'all',
 		title: 'Все задачи',
-	},
-	{
-		id: 1,
-		color: 'blue',
-		title: 'Покупки',
-		tasks: [
-			{
-				desc: 'Make coffee',
-				status: 'Uncompleted',
-			},
-			{
-				desc: 'Make coffee',
-				status: 'Completed',
-			},
-			{
-				desc: 'Make coffee',
-				status: 'Uncompleted',
-			},
-		],
+		active: true,
+		tasks: [],
 	},
 	{
 		id: 2,
@@ -41,6 +24,7 @@ export const folderMock = [
 				status: 'Uncompleted',
 			},
 		],
+		active: false,
 	},
 	{
 		id: 3,
@@ -60,6 +44,7 @@ export const folderMock = [
 				status: 'Uncompleted',
 			},
 		],
+		active: false,
 	},
 	{
 		id: 4,
@@ -79,6 +64,7 @@ export const folderMock = [
 				status: 'Uncompleted',
 			},
 		],
+		active: false,
 	},
 	{
 		id: 5,
@@ -98,5 +84,26 @@ export const folderMock = [
 				status: 'Uncompleted',
 			},
 		],
+		active: false,
+	},
+	{
+		id: 6,
+		color: 'blue',
+		title: 'Покупки',
+		tasks: [
+			{
+				desc: 'Make coffee',
+				status: 'Uncompleted',
+			},
+			{
+				desc: 'Make coffee',
+				status: 'Completed',
+			},
+			{
+				desc: 'Make coffee',
+				status: 'Uncompleted',
+			},
+		],
+		active: false,
 	},
 ];

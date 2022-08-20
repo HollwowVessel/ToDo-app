@@ -1,12 +1,20 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux/es';
-import { changeActiveColor } from '../../../redux/slices/activeSlice';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux/es';
 import { changePopup } from '../../../redux/slices/addSlice';
+import { addFolder } from '../../../redux/slices/folderSlice';
 
 export const Popup = () => {
 	const colors = ['gray', 'green', 'blue', 'pink', 'lime', 'purple', 'black', 'orange'];
 	const dispatch = useDispatch();
-	const { activeColor } = useSelector((state) => state.setActive);
+	let id = useSelector((state) => state.changeFolder.folders);
+	id = id[id.length - 1].id + 1;
+	const [activeColor, setActiveColor] = useState(0);
+	const [text, setText] = useState('');
+	console.log(id);
+	function handleAddFolder(text) {
+		dispatch(changePopup());
+		dispatch(addFolder({ id, color: colors[activeColor], title: text, active: true, tasks: [] }));
+	}
 
 	return (
 		<div className="modal" onClick={() => dispatch(changePopup())}>
@@ -17,10 +25,14 @@ export const Popup = () => {
 					className="close"
 					onClick={() => dispatch(changePopup())}
 				/>
-				<input placeholder="Название папки" />
+				<input
+					placeholder="Название папки"
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+				/>
 				<ul>
 					{colors.map((color, ind) => (
-						<li key={ind} onClick={() => dispatch(changeActiveColor(ind))}>
+						<li key={ind} onClick={() => setActiveColor(ind)}>
 							<img
 								src={`/img/svg/colors/${color}.svg`}
 								alt={color}
@@ -29,7 +41,7 @@ export const Popup = () => {
 						</li>
 					))}
 				</ul>
-				<button onClick={() => dispatch(changePopup())}>Добавить</button>
+				<button onClick={() => handleAddFolder(text)}>Добавить</button>
 			</div>
 		</div>
 	);
