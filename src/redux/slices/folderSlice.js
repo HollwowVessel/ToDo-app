@@ -3,7 +3,7 @@ import { folderMock } from '../../Mocks/Folder';
 
 const initialState = {
 	folders: folderMock,
-	currentFolder: [],
+	currentFolder: [folderMock[0]],
 };
 
 const taskSlice = createSlice({
@@ -17,15 +17,15 @@ const taskSlice = createSlice({
 				state.currentFolder[0],
 			].sort((a, b) => a.id - b.id);
 		},
-		delTask: (state, action) => {
-			state.currentFolder = state.currentFolder.tasks.filter((obj) => obj.id !== action.payload);
-		},
-		clearTask: (state) => {
-			state.currentFolder = [];
+		onLoad: (state) => {
+			const tasks = [];
+			for (let item of state.folders) {
+				tasks.push(...item.tasks);
+			}
+			state.folders[0] = { ...state.folders[0], tasks };
 		},
 		changeTask: (state, action) => {},
 		setActiveFolder: (state, action) => {
-			console.log(state.currentFolder);
 			state.currentFolder = [state.folders[action.payload]];
 			state.folders = [
 				...state.folders.filter((obj) => obj.id !== state.currentFolder[0].id),
@@ -33,12 +33,26 @@ const taskSlice = createSlice({
 			].sort((a, b) => a.id - b.id);
 		},
 		addFolder: (state, action) => {
-			state.folders = [
-				...state.folders.filter((obj) => obj.id !== state.currentFolder[0].id),
-				action.payload,
-			].sort((a, b) => a.id - b.id);
+			state.folders.push(action.payload);
 		},
-		delFolder: (state) => {},
+		delFolder: (state, action) => {
+			console.log(action.payload);
+			if (action.payload == 1) {
+				console.log('del all');
+				state.folders = [
+					{
+						id: 1,
+						color: 'all',
+						title: 'Все задачи',
+						active: true,
+						tasks: [],
+					},
+				];
+
+				state.currentFolder = [state.folders[0]];
+			}
+			state.folders = state.folders.filter((obj) => obj.id !== action.payload);
+		},
 		editFolder: (state, action) => {},
 	},
 });
@@ -52,5 +66,6 @@ export const {
 	addFolder,
 	delFolder,
 	editFolder,
+	onLoad,
 } = taskSlice.actions;
 export default taskSlice.reducer;

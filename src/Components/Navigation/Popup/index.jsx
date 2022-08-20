@@ -7,11 +7,11 @@ export const Popup = () => {
 	const colors = ['gray', 'green', 'blue', 'pink', 'lime', 'purple', 'black', 'orange'];
 	const dispatch = useDispatch();
 	let id = useSelector((state) => state.changeFolder.folders);
-	id = id[id.length - 1].id + 1;
+	id = id.length + 1;
 	const [activeColor, setActiveColor] = useState(0);
 	const [text, setText] = useState('');
 	console.log(id);
-	function handleAddFolder(text) {
+	function handleAddFolder(text, e) {
 		dispatch(changePopup());
 		dispatch(addFolder({ id, color: colors[activeColor], title: text, active: true, tasks: [] }));
 	}

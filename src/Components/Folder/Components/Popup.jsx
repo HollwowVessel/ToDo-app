@@ -7,7 +7,9 @@ export const Popup = ({ handleClick }) => {
 	const dispatch = useDispatch();
 	const [text, setText] = useState('');
 	function handleAddTask(text) {
+		setText('');
 		dispatch(addTask({ desc: text, status: 'Uncompleted' }));
+		handleClick();
 	}
 
 	return (

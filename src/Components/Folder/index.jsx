@@ -13,13 +13,13 @@ export const Folder = () => {
 	return (
 		<div className="folder-container">
 			<h1>
-				Покупки
+				{folder[0]?.title}
 				<span>
 					<img src="/img/svg/edit.svg" />
 				</span>
 			</h1>
 			<div className="tasks">
-				{folder.map((obj) => obj.tasks?.map((task, ind) => <Task key={ind} {...task} />))}
+				{folder.map((obj) => obj?.tasks.map((task, ind) => <Task key={ind} {...task} />))}
 			</div>
 			{!open ? (
 				<button className="addTask" onClick={() => dispatch(changeTask())}>
