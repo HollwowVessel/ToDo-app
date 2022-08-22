@@ -13,15 +13,15 @@ export const folderMock = [
 		tasks: [
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Completed',
+				checked: true,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 		],
 		active: false,
@@ -33,15 +33,15 @@ export const folderMock = [
 		tasks: [
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Completed',
+				checked: true,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 		],
 		active: false,
@@ -53,15 +53,15 @@ export const folderMock = [
 		tasks: [
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Completed',
+				checked: true,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 		],
 		active: false,
@@ -73,15 +73,15 @@ export const folderMock = [
 		tasks: [
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Completed',
+				checked: true,
 			},
 			{
 				desc: 'Make coffee',
-				status: 'Uncompleted',
+				checked: false,
 			},
 		],
 		active: false,

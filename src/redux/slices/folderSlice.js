@@ -3,7 +3,7 @@ import { folderMock } from '../../Mocks/Folder';
 
 const initialState = {
 	folders: folderMock,
-	currentFolder: [folderMock[0]],
+	currentFolder: folderMock[0],
 };
 
 const taskSlice = createSlice({
@@ -11,25 +11,27 @@ const taskSlice = createSlice({
 	initialState,
 	reducers: {
 		addTask: (state, action) => {
-			state.currentFolder[0].tasks.push(action.payload);
+			state.currentFolder.tasks.push(action.payload);
 			state.folders = [
-				...state.folders.filter((obj) => obj.id !== state.currentFolder[0].id),
-				state.currentFolder[0],
+				...state.folders.filter((obj) => obj.id !== state.currentFolder.id),
+				state.currentFolder,
 			].sort((a, b) => a.id - b.id);
+			state.folders[0].tasks.push(action.payload);
 		},
 		onLoad: (state) => {
 			const tasks = [];
-			for (let item of state.folders) {
-				tasks.push(...item.tasks);
+			for (let i = 1; i < state.folders.length; i++) {
+				tasks.push(...state.folders[i].tasks);
 			}
-			state.folders[0] = { ...state.folders[0], tasks };
+			console.log(tasks);
+			state.folders[0].tasks = tasks;
 		},
 		changeTask: (state, action) => {},
 		setActiveFolder: (state, action) => {
-			state.currentFolder = [state.folders[action.payload]];
+			state.currentFolder = state.folders[action.payload];
 			state.folders = [
-				...state.folders.filter((obj) => obj.id !== state.currentFolder[0].id),
-				state.currentFolder[0],
+				...state.folders.filter((obj) => obj.id !== state.currentFolder.id),
+				state.currentFolder,
 			].sort((a, b) => a.id - b.id);
 		},
 		addFolder: (state, action) => {
@@ -37,7 +39,7 @@ const taskSlice = createSlice({
 		},
 		delFolder: (state, action) => {
 			console.log(action.payload);
-			if (action.payload == 1) {
+			if (action.payload === 1) {
 				console.log('del all');
 				state.folders = [
 					{
@@ -48,8 +50,8 @@ const taskSlice = createSlice({
 						tasks: [],
 					},
 				];
-
-				state.currentFolder = [state.folders[0]];
+				state.currentFolder = state.folders[0];
+				return;
 			}
 			state.folders = state.folders.filter((obj) => obj.id !== action.payload);
 		},

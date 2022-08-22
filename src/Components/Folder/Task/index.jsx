@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const Task = ({ desc, status }) => {
+export const Task = ({ desc, checked }) => {
 	const [text, setText] = useState(desc);
 
 	return (

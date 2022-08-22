@@ -6,13 +6,13 @@ import './style.scss';
 
 import { Item } from './Item';
 import { Popup } from './Popup';
-import { setActiveFolder } from '../../redux/slices/folderSlice';
+import { onLoad, setActiveFolder } from '../../redux/slices/folderSlice';
 import { changePopup } from '../../redux/slices/addSlice';
 
 export const Navigation = () => {
 	const dispatch = useDispatch();
 	const open = useSelector((state) => state.changePopup.popupOpen);
-	const currentFolder = useSelector((state) => state.changeFolder.folders);
+	const navFolders = useSelector((state) => state.changeFolder.folders);
 	const [active, setActive] = useState(0);
 
 	function handleActiveFolder(id) {
@@ -23,14 +23,23 @@ export const Navigation = () => {
 	return (
 		<nav>
 			<ul className="nav-menu">
-				{currentFolder.map((obj, ind) => (
+				{navFolders.length ? (
+					navFolders.map((obj, ind) => (
+						<Item
+							key={ind}
+							{...obj}
+							state={ind === active ? 'active' : ''}
+							handleClick={() => handleActiveFolder(ind)}
+						/>
+					))
+				) : (
 					<Item
-						key={ind}
-						{...obj}
-						state={ind === active ? 'active' : ''}
-						handleClick={() => handleActiveFolder(ind)}
+						key={1}
+						{...navFolders}
+						state={1 === active ? 'active' : ''}
+						handleClick={() => handleActiveFolder(1)}
 					/>
-				))}
+				)}
 			</ul>
 			<div className="nav-popup">
 				<button className="addFolder" onClick={() => dispatch(changePopup())}>
