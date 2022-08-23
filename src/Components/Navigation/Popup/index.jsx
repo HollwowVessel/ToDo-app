@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es';
-import { changePopup } from '../../../redux/slices/addSlice';
 import { addFolder } from '../../../redux/slices/folderSlice';
 
-export const Popup = () => {
+export const Popup = ({ handleClick }) => {
 	const colors = ['gray', 'green', 'blue', 'pink', 'lime', 'purple', 'black', 'orange'];
 	const dispatch = useDispatch();
 	let id = useSelector((state) => state.changeFolder.folders);
@@ -11,24 +10,27 @@ export const Popup = () => {
 	const [activeColor, setActiveColor] = useState(0);
 	const [text, setText] = useState('');
 	console.log(id);
-	function handleAddFolder(text, e) {
-		dispatch(changePopup());
+	function handleAddFolder(e, text) {
+		if (!text.trim().length) return;
+		if (e.type !== 'click' && e.type !== 'keyup') {
+			return;
+		}
+		if (e.type === 'keyup' && e.key !== 'Enter') {
+			return;
+		}
+		handleClick();
 		dispatch(addFolder({ id, color: colors[activeColor], title: text, active: true, tasks: [] }));
 	}
 
 	return (
-		<div className="modal" onClick={() => dispatch(changePopup())}>
+		<div className="modal" onClick={() => handleClick()}>
 			<div className="folder-popup" onClick={(e) => e.stopPropagation()}>
-				<img
-					src="/img/svg/close.svg"
-					alt="close"
-					className="close"
-					onClick={() => dispatch(changePopup())}
-				/>
+				<img src="/img/svg/close.svg" alt="close" className="close" onClick={() => handleClick()} />
 				<input
 					placeholder="Название папки"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
+					onKeyUp={(e) => handleAddFolder(e, e.target.value)}
 				/>
 				<ul>
 					{colors.map((color, ind) => (
@@ -41,7 +43,7 @@ export const Popup = () => {
 						</li>
 					))}
 				</ul>
-				<button onClick={() => handleAddFolder(text)}>Добавить</button>
+				<button onClick={(e) => handleAddFolder(e, text)}>Добавить</button>
 			</div>
 		</div>
 	);

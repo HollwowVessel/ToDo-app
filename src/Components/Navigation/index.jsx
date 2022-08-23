@@ -7,11 +7,10 @@ import './style.scss';
 import { Item } from './Item';
 import { Popup } from './Popup';
 import { onLoad, setActiveFolder } from '../../redux/slices/folderSlice';
-import { changePopup } from '../../redux/slices/addSlice';
 
 export const Navigation = () => {
 	const dispatch = useDispatch();
-	const open = useSelector((state) => state.changePopup.popupOpen);
+	const [open, setOpen] = useState(false);
 	const navFolders = useSelector((state) => state.changeFolder.folders);
 	const [active, setActive] = useState(0);
 
@@ -42,13 +41,13 @@ export const Navigation = () => {
 				)}
 			</ul>
 			<div className="nav-popup">
-				<button className="addFolder" onClick={() => dispatch(changePopup())}>
+				<button className="addFolder" onClick={() => setOpen((prev) => !prev)}>
 					<span>
 						<img src="/img/svg/plus.svg" />
 					</span>
 					Добавить папку
 				</button>
-				{open && <Popup />}
+				{open && <Popup handleClick={() => setOpen((prev) => !prev)} />}
 			</div>
 		</nav>
 	);
