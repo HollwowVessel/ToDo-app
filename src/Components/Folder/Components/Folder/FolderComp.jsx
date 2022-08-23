@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Task } from '../../Task';
 
 export const FolderComp = ({ folder }) => {
-	console.log(folder);
 	return (
 		<div>
 			<h1>{folder.title}</h1>

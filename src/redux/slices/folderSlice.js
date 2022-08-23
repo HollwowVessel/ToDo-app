@@ -1,5 +1,17 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
+import { collection, getDocs, query } from 'firebase/firestore';
+import db from '../../firebase';
 import { folderMock } from '../../Mocks/Folder';
+
+const getFolders = createAsyncThunk('folders/getFolders', async (todoId) => {
+	const q = query(collection(db, '0'));
+	const querySnapshot = await getDocs(q);
+	const tasks = [];
+	querySnapshot.forEach((doc) => {
+		tasks.push(doc.data());
+	});
+	return tasks;
+});
 
 const initialState = {
 	folders: folderMock,

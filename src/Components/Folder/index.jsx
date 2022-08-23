@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux/es';
 import { Task } from './Task';
 import './style.scss';
 import { Popup } from './Components/Popup';
-import { changeTask } from '../../redux/slices/addSlice';
 import { editFolder, onLoad } from '../../redux/slices/folderSlice';
 import { FolderContainer } from './Components/FolderContainer';
 import { AllFolders } from './Components/AllFolders';
