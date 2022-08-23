@@ -11,7 +11,14 @@ export const Popup = () => {
 	const [activeColor, setActiveColor] = useState(0);
 	const [text, setText] = useState('');
 	console.log(id);
-	function handleAddFolder(text, e) {
+	function handleAddFolder(e, text) {
+		if (!text.trim().length) return;
+		if (e.type !== 'click' && e.type !== 'keyup') {
+			return;
+		}
+		if (e.type === 'keyup' && e.key !== 'Enter') {
+			return;
+		}
 		dispatch(changePopup());
 		dispatch(addFolder({ id, color: colors[activeColor], title: text, active: true, tasks: [] }));
 	}
@@ -29,6 +36,7 @@ export const Popup = () => {
 					placeholder="Название папки"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
+					onKeyUp={(e) => handleAddFolder(e, e.target.value)}
 				/>
 				<ul>
 					{colors.map((color, ind) => (
@@ -41,7 +49,7 @@ export const Popup = () => {
 						</li>
 					))}
 				</ul>
-				<button onClick={() => handleAddFolder(text)}>Добавить</button>
+				<button onClick={(e) => handleAddFolder(e, text)}>Добавить</button>
 			</div>
 		</div>
 	);

@@ -11,18 +11,9 @@ export const folderMock = [
 		color: 'blue',
 		title: 'Покупки',
 		tasks: [
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
-			{
-				desc: 'Make coffee',
-				checked: true,
-			},
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
+			{ id: 1, desc: 'Make cof', checked: false },
+			{ id: 2, desc: 'Make coff', checked: true },
+			{ id: 3, desc: 'Make coffe', checked: false },
 		],
 		active: false,
 	},
@@ -31,58 +22,9 @@ export const folderMock = [
 		color: 'blue',
 		title: 'Покупки',
 		tasks: [
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
-			{
-				desc: 'Make coffee',
-				checked: true,
-			},
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
-		],
-		active: false,
-	},
-	{
-		id: 4,
-		color: 'blue',
-		title: 'Покупки',
-		tasks: [
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
-			{
-				desc: 'Make coffee',
-				checked: true,
-			},
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
-		],
-		active: false,
-	},
-	{
-		id: 5,
-		color: 'blue',
-		title: 'Покупки',
-		tasks: [
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
-			{
-				desc: 'Make coffee',
-				checked: true,
-			},
-			{
-				desc: 'Make coffee',
-				checked: false,
-			},
+			{ id: 4, desc: 'Make', checked: false },
+			{ id: 5, desc: 'Ma coffee', checked: false },
+			{ id: 6, desc: 'M coffee', checked: false },
 		],
 		active: false,
 	},

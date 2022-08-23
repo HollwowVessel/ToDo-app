@@ -9,7 +9,7 @@ const addSlice = createSlice({
 	name: 'addSlice',
 	initialState,
 	reducers: {
-		changePopup: (state, action) => {
+		changePopup: (state) => {
 			state.popupOpen = !state.popupOpen;
 		},
 		changeTask: (state) => {
