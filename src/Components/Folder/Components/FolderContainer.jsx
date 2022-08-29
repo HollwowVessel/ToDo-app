@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTask, editFolder } from '../../../redux/slices/folderSlice';
+import { changeTask, editFolder, setFolders } from '../../../redux/slices/folderSlice';
 import { Task } from '../Task';
 import { Popup } from './Popup';
 
@@ -22,6 +22,7 @@ export const FolderContainer = () => {
 		}
 		setOpenPopup((prev) => !prev);
 		if (!openPopup) return;
+		dispatch(setFolders({ ...folder, title: text }, `task${folder.id - 1}`));
 		dispatch(editFolder(text));
 	}
 	useEffect(() => {
@@ -46,7 +47,7 @@ export const FolderContainer = () => {
 				)}
 			</h1>
 			<div className="tasks">
-				{folder?.tasks.length ? (
+				{folder && folder?.tasks?.length ? (
 					folder.tasks.map((task, ind) => <Task key={ind} {...task} />)
 				) : (
 					<h1>Нет тасков :(</h1>

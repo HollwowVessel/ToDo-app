@@ -10,7 +10,6 @@ import { AllFolders } from './Components/AllFolders';
 export const Folder = () => {
 	const dispatch = useDispatch();
 	const folder = useSelector((state) => state.changeFolder.currentFolder).id;
-	console.log(folder);
 	useEffect(() => {
 		dispatch(onLoad());
 	});

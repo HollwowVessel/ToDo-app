@@ -1,10 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { delFolder } from '../../../redux/slices/folderSlice';
+import { delFolder, delFolders } from '../../../redux/slices/folderSlice';
 
 export const Item = ({ id, color, title, handleClick, state }) => {
 	const dispatch = useDispatch();
+	function handleDel() {
+		dispatch(delFolder(id));
+		dispatch(delFolders(id));
+	}
 	return (
 		<li className={state ? `nav-menu__item ${state}` : 'nav-menu__item'} onClick={handleClick}>
 			<img src={`/img/svg/colors/${color}.svg`} alt={color} />
@@ -12,7 +16,9 @@ export const Item = ({ id, color, title, handleClick, state }) => {
 				{title}
 			</Link>
 			<button>
-				<img src="/img/svg/del.svg" alt="clear" onClick={() => dispatch(delFolder(id))} />
+				{id === 1 ? undefined : (
+					<img src="/img/svg/del.svg" alt="clear" onClick={() => handleDel()} />
+				)}
 			</button>
 		</li>
 	);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 
@@ -6,10 +6,11 @@ import './style.scss';
 
 import { Item } from './Item';
 import { Popup } from './Popup';
-import { onLoad, setActiveFolder } from '../../redux/slices/folderSlice';
+import { getFolders, onLoad, setActiveFolder } from '../../redux/slices/folderSlice';
 
 export const Navigation = () => {
 	const dispatch = useDispatch();
+
 	const [open, setOpen] = useState(false);
 	const navFolders = useSelector((state) => state.changeFolder.folders);
 	const [active, setActive] = useState(0);

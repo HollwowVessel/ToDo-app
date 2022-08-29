@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es';
-import { addFolder } from '../../../redux/slices/folderSlice';
+import { addFolder, setFolders } from '../../../redux/slices/folderSlice';
 
 export const Popup = ({ handleClick }) => {
 	const colors = ['gray', 'green', 'blue', 'pink', 'lime', 'purple', 'black', 'orange'];
 	const dispatch = useDispatch();
-	let id = useSelector((state) => state.changeFolder.folders);
-	id = id.length + 1;
+	let id = useSelector((state) => state.changeFolder.folders).length + 1;
 	const [activeColor, setActiveColor] = useState(0);
 	const [text, setText] = useState('');
 	console.log(id);
@@ -20,6 +19,7 @@ export const Popup = ({ handleClick }) => {
 		}
 		handleClick();
 		dispatch(addFolder({ id, color: colors[activeColor], title: text, active: true, tasks: [] }));
+		dispatch(setFolders({ id, color: colors[activeColor], title: text, active: true, tasks: [] }));
 	}
 
 	return (
