@@ -1,9 +1,18 @@
-import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
-import { collection, getDocs, query } from 'firebase/firestore';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+	collection,
+	deleteDoc,
+	deleteField,
+	doc,
+	getDocs,
+	query,
+	setDoc,
+	updateDoc,
+} from 'firebase/firestore';
 import db from '../../firebase';
 import { folderMock } from '../../Mocks/Folder';
 
-const getFolders = createAsyncThunk('folders/getFolders', async (todoId) => {
+export const getFolders = createAsyncThunk('folders/getFolders', async () => {
 	const q = query(collection(db, '0'));
 	const querySnapshot = await getDocs(q);
 	const tasks = [];
@@ -12,10 +21,21 @@ const getFolders = createAsyncThunk('folders/getFolders', async (todoId) => {
 	});
 	return tasks;
 });
+export const setFolders = createAsyncThunk('folders/setFolders', async (item) => {
+	let name = `task${item.id - 1}`;
+	const taskRef = doc(db, '0', name);
+	await setDoc(taskRef, item);
+});
+export const delFolders = createAsyncThunk('folders/delFolders', async (id) => {
+	let name = `task${id - 1}`;
+	const taskRef = doc(db, '0', name);
+	console.log(id);
+	await deleteDoc(taskRef);
+});
 
 const initialState = {
-	folders: folderMock,
-	currentFolder: folderMock[0],
+	folders: [{}],
+	currentFolder: [],
 };
 
 const taskSlice = createSlice({
@@ -119,6 +139,13 @@ const taskSlice = createSlice({
 			].sort((a, b) => a.id - b.id);
 		},
 	},
+	extraReducers: {
+		[getFolders.fulfilled]: (state, action) => {
+			state.folders = action.payload;
+			console.log(state.folders);
+			state.currentFolder = state.folders[0];
+		},
+	},
 });
 
 export const {
@@ -133,4 +160,5 @@ export const {
 	onLoad,
 	setActive,
 } = taskSlice.actions;
+
 export default taskSlice.reducer;
