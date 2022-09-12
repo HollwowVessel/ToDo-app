@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTask, editFolder, setFolders } from '../../../redux/slices/folderSlice';
+import { editFolder, setFolders } from '../../../redux/slices/folderSlice';
 import { Task } from '../Task';
 import { Popup } from './Popup';
 
@@ -33,7 +33,7 @@ export const FolderContainer = () => {
 			<h1 onClick={(e) => e.stopPropagation}>
 				{folder.title}
 				<span onClick={(e) => handleClick(e, text)}>
-					<img src="/img/svg/edit.svg" />
+					<img src={'./img/svg/edit.svg'} alt="edit" />
 				</span>
 				{openPopup && (
 					<div className="title-popup">
@@ -56,7 +56,7 @@ export const FolderContainer = () => {
 			{!open ? (
 				<button className="addTask" onClick={() => setOpen((prev) => !prev)}>
 					<span>
-						<img src="/img/svg/plus.svg" />
+						<img src="./img/svg/plus.svg" alt="plus" />
 					</span>
 					Новая задача
 				</button>

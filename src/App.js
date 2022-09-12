@@ -7,18 +7,18 @@ import { Navigation } from './Components/Navigation';
 import './style.scss';
 
 function App() {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getFolders());
-	});
-	return (
-		<div className="App">
-			<div className="container">
-				<Navigation />
-				<Folder />
-			</div>
-		</div>
-	);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getFolders());
+  });
+  return (
+    <div className="App">
+      <div className="container">
+        <Navigation />
+        <Folder />
+      </div>
+    </div>
+  );
 }
 
 export default App;

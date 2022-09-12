@@ -1,28 +1,79 @@
 body {
-	overflow: hidden;
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 16px;
-	letter-spacing: 0.15px;
-	color: #000000;
+  overflow: hidden;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.15px;
+  color: #000000;
 }
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-	display: flex;
-	width: inherit;
-	height: 100vh;
+  display: flex;
+  width: inherit;
+  height: 100vh;
 
-	.nav {
-		width: 30vw;
-	}
-	.folder {
-		width: 70vw;
-	}
+  .nav {
+    width: 30vw;
+  }
+  .folder {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  body {
+    overflow: auto;
+  }
+  .container {
+    flex-direction: column;
+    nav {
+      padding: 57px 40px 79px 28px !important;
+    }
+    .folders {
+      max-height: 600px;
+    }
+    .folder-container {
+      max-width: 700px;
+    }
+  }
+  .task-popup > input {
+    min-width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    nav {
+      padding: 57px 40px 79px 28px !important;
+    }
+    .folders {
+      max-height: 400px;
+    }
+    .folder-container {
+      max-width: 400px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    flex-direction: column;
+    nav {
+      padding: 57px 40px 79px 28px !important;
+    }
+    .folders {
+      max-height: 200px;
+    }
+    .folder-container {
+      max-width: 350px;
+    }
+  }
 }
